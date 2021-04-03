@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/authentication/authentication_controller.dart';
-import 'package:myapp/main.dart';
+import 'package:myapp/modules/dashboard/dashboard.dart';
+
+import 'authentication_controller.dart';
 
 class Authentication extends StatefulWidget {
   @override
@@ -45,7 +46,7 @@ class _AuthenticationState extends State<Authentication> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
+                            builder: (context) => Dashboard(),
                           ));
                     }
                   },
@@ -64,7 +65,7 @@ class _AuthenticationState extends State<Authentication> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
+                            builder: (context) => Dashboard(),
                           ));
                     }
                   },
