@@ -13,16 +13,16 @@ export const getGroups = functions.https.onRequest((request, response) => {
   functions.logger.info("Hello logs!", {structuredData: true});
   response.send([
     {
-      name: 'grupa 1',
-      users: [1,2,3,4]
+      name: "grupa 1",
+      users: [1, 2, 3, 4],
     },
     {
-      name: 'grupa 2',
-      users: [1,2,3,4]
+      name: "grupa 2",
+      users: [1, 2, 3, 4],
     },
     {
-      name: 'grupa 3',
-      users: [1,2,3,4]
-    }
+      name: "grupa 3",
+      users: [1, 2, 3, 4],
+    },
   ]);
 });
