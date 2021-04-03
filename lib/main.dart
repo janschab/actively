@@ -10,7 +10,10 @@ void main() {
 class AppContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Directionality(textDirection: TextDirection.ltr, child: App());
+    return Directionality(
+        textDirection: TextDirection.ltr,
+        child: App(),
+    );
   }
 }
 
@@ -59,9 +62,9 @@ class MainContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Demo 2',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepOrange,
         brightness: Brightness.dark
       ),
       home: UserResolver(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myapp/modules/dashboard/dashboard.dart';
 
 import 'authentication_controller.dart';
@@ -35,6 +36,7 @@ class _AuthenticationState extends State<Authentication> {
                     hintText: 'password', labelText: 'Password'),
               ),
               Container(
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 12),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: Colors.blue),
@@ -59,14 +61,21 @@ class _AuthenticationState extends State<Authentication> {
                     color: Colors.blue),
                 child: MaterialButton(
                   onPressed: () async {
-                    bool shouldNavigate =
+                    String shouldNavigate =
                         await signIn(_emailField.text, _passwordField.text);
-                    if (shouldNavigate) {
+                    if (shouldNavigate == "200") {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => Dashboard(),
                           ));
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: shouldNavigate,
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 5
+                      );
                     }
                   },
                   child: Text("Log-in"),
