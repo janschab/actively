@@ -1,7 +1,7 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/core/authentication/authentication.dart';
-import 'package:myapp/modules/dashboard/dashboard.dart';
 
 class UserResolver extends StatefulWidget {
   @override
@@ -9,23 +9,22 @@ class UserResolver extends StatefulWidget {
 }
 
 class _UserResolverState extends State<UserResolver> {
+  StreamSubscription<User> _listener;
 
   @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.authStateChanges().listen((User user) {
+    _listener = FirebaseAuth.instance.authStateChanges().listen((User user) {
       if (user == null) {
-        Navigator.push(
+        Navigator.pushNamed(
             context,
-            MaterialPageRoute(
-              builder: (context) => Authentication(),
-            ));
+            '/login'
+        );
       } else {
-        Navigator.push(
+        Navigator.pushNamed(
             context,
-            MaterialPageRoute(
-              builder: (context) => Dashboard(),
-            ));
+            '/dashboard'
+        );
       }
     });
   }
@@ -35,5 +34,11 @@ class _UserResolverState extends State<UserResolver> {
     return Center(
       child: CircularProgressIndicator(),
     );
+  }
+
+  @override
+  void dispose() {
+    _listener.cancel();
+    super.dispose();
   }
 }

@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'core/authentication/authentication.dart';
 import 'core/authentication/user_resolver.dart';
+import 'modules/dashboard/dashboard.dart';
 
 void main() {
   runApp(AppContainer());
@@ -63,11 +65,16 @@ class MainContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo 2',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => UserResolver(),
+        '/login': (context) => Authentication(),
+        '/dashboard': (context) => Dashboard(),
+      },
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
         brightness: Brightness.dark
       ),
-      home: UserResolver(),
     );
   }
 }
