@@ -13,6 +13,7 @@ class GroupsList extends StatelessWidget {
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
 
         if (snapshot.hasError) {
+          print(snapshot.error.toString());
           return Text("Something went wrong");
         }
 
