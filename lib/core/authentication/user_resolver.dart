@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../firestore/firebase_auth_instance_provider.dart';
+
 class UserResolver extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _UserResolverState();
@@ -14,7 +16,7 @@ class _UserResolverState extends State<UserResolver> {
   @override
   void initState() {
     super.initState();
-    _listener = FirebaseAuth.instance.authStateChanges().listen((User user) {
+    _listener = getFirebaseAuthInstance().authStateChanges().listen((User user) {
       if (user == null) {
         Navigator.pushNamed(
             context,
@@ -23,7 +25,7 @@ class _UserResolverState extends State<UserResolver> {
       } else {
         Navigator.pushNamed(
             context,
-            '/dashboard'
+            '/groups'
         );
       }
     });

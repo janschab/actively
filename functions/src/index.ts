@@ -7,7 +7,17 @@ admin.initializeApp({
   databaseURL: "https://actively-796ad-default-rtdb.europe-west1.firebasedatabase.app",
 });
 
-// const db = admin.database();
+const db = admin.firestore();
+
+exports.onUserCreate = functions.auth.user().onCreate((user) => {
+  db.collection('users').doc(user.uid).create({
+    first_name: '',
+    last_name: '',
+    email: user.email
+  }).then(value => {
+    console.log(value);
+  });
+});
 
 export const getGroups = functions.https.onRequest((request, response) => {
   functions.logger.info("Hello logs!", {structuredData: true});

@@ -2,15 +2,16 @@
   "name": "functions",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "build": "tsc",
+    "build-functions": "tsc",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "deploy-functions": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "build-web": "flutter build web",
     "deploy-web": "firebase deploy --only hosting",
-    "deploy-firestore-rules": "firebase deploy --only firestore:rules"
+    "deploy-firestore-rules": "firebase deploy --only firestore:rules",
+    "start-emulators": "firebase emulators:start"
   },
   "engines": {
     "node": "12"
