@@ -14,28 +14,6 @@ import 'modules/activities/activities.dart';
 import 'modules/groups/groups.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  String host = "localhost:8080";
-  try {
-    host = Platform.isAndroid ? "10.0.2.2:8080" : "localhost:8080";
-  } catch(e) {
-    host = "localhost:8080";
-  }
-  FirebaseFirestore.instance.settings = Settings(
-    host: host,
-    sslEnabled: false,
-    persistenceEnabled: true,
-  );
-
-  try {
-    await getFirestoreAuthInstance().enablePersistence();
-  } catch(e) {
-    print(e.toString());
-  }
-  await getFirebaseAuthInstance().useEmulator("http://localhost:9099");
-  await getFirebaseAuthInstance().setPersistence(Persistence.LOCAL);
-
   runApp(AppContainer());
 }
 
@@ -51,7 +29,7 @@ class AppContainer extends StatelessWidget {
 
 class App extends StatelessWidget {
   // Create the initialization Future outside of `build`:
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Future<void> _initialization = initializeFirebase();
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +37,7 @@ class App extends StatelessWidget {
       // Initialize FlutterFire:
       future: _initialization,
       builder: (context, snapshot) {
+        print(snapshot);
         // Check for errors
         if (snapshot.hasError) {
           return SomethingWentWrong();
@@ -73,6 +52,33 @@ class App extends StatelessWidget {
         return Loading();
       },
     );
+  }
+
+  static Future<void> initializeFirebase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    String host = "localhost:8080";
+    try {
+      host = Platform.isAndroid ? "10.0.2.2:8080" : "localhost:8080";
+    } catch(e) {
+      host = "localhost:8080";
+    }
+
+    await Firebase.initializeApp();
+
+    FirebaseFirestore.instance.settings = Settings(
+      host: host,
+      sslEnabled: false,
+      persistenceEnabled: true,
+    );
+
+    try {
+      await getFirestoreAuthInstance().enablePersistence();
+      await getFirebaseAuthInstance().setPersistence(Persistence.LOCAL);
+    } catch(e) {
+      print(e.toString());
+    }
+    await getFirebaseAuthInstance().useEmulator("http://localhost:9099");
   }
 }
 
