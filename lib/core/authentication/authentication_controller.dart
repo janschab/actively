@@ -17,7 +17,7 @@ Future<String> signIn(String email, String password) async {
 Future<String> register(String email, String password) async {
   try {
     await getFirebaseAuthInstance()
-        .createUserWithEmailAndPassword(email: email, password: password);
+        .createUserWithEmailAndPassword(email: email, password: password).then((response) => response.user.updateProfile(displayName: email));
     return "200";
   } on FirebaseAuthException catch (e) {
     return e.code.toString();
