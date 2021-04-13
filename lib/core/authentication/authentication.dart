@@ -10,6 +10,7 @@ class Authentication extends StatefulWidget {
 }
 
 class _AuthenticationState extends State<Authentication> {
+  TextEditingController _displayNameField = TextEditingController();
   TextEditingController _emailField = TextEditingController();
   TextEditingController _passwordField = TextEditingController();
 
@@ -24,6 +25,14 @@ class _AuthenticationState extends State<Authentication> {
           constraints: BoxConstraints(maxWidth: 500),
           child: Column(
             children: [
+              TextFormField(
+                controller: _displayNameField,
+                decoration: InputDecoration(
+                  hintText: 'display name',
+                  labelText: 'Display name',
+                ),
+                onFieldSubmitted: handleLogInAction,
+              ),
               TextFormField(
                 controller: _emailField,
                 decoration: InputDecoration(
@@ -89,7 +98,7 @@ class _AuthenticationState extends State<Authentication> {
   }
 
   handleRegisterAction() async {
-    String registerStatus = await register(_emailField.text, _passwordField.text);
+    String registerStatus = await register(_emailField.text, _passwordField.text, _displayNameField.text);
     if (registerStatus == "200") {
       Navigator.push(
           context,
