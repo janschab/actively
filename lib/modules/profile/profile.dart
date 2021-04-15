@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/widgets/bottomNavigationBar.dart';
 
 import '../groups/list.dart';
 
-class Groups extends StatefulWidget {
+class Profile extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _GroupsState();
+  State<StatefulWidget> createState() => _ProfileState();
 }
 
-class _GroupsState extends State<Groups> {
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Groups"),
+        title: Text("Profile"),
         leading: Container(),
       ),
       body: Container(
@@ -25,38 +26,9 @@ class _GroupsState extends State<Groups> {
         child: Icon(Icons.add),
         backgroundColor: Colors.deepOrange,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            label: "Activities",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: "Groups",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: "Profile",
-          ),
-        ],
-        selectedItemColor: Colors.deepOrange,
-        onTap: handleNavigationBarTap,
+      bottomNavigationBar: MyBottomNavigationBar(
+        currentIndex: 2,
       ),
     );
-  }
-
-  handleNavigationBarTap(index) {
-    switch(index) {
-      case 0:
-        Navigator.pushNamed(context, "/activities");
-        break;
-      case 1:
-        Navigator.pushNamed(context, "/groups");
-        break;
-      case 2:
-        Navigator.pushNamed(context, "/profile");
-        break;
-    }
   }
 }
