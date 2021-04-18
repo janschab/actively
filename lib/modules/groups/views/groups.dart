@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/routes/routes.dart';
+import 'package:myapp/core/services/navigator.dart';
 import 'package:myapp/core/widgets/bottomNavigationBar.dart';
 
-import '../groups/list.dart';
+import 'list.dart';
 
 class Groups extends StatefulWidget {
   @override
@@ -22,7 +24,7 @@ class _GroupsState extends State<Groups> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => NavigatorService.instance.navigateTo(routeGroupsAdd),
         child: Icon(Icons.add),
         backgroundColor: Colors.deepOrange,
       ),

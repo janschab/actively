@@ -8,10 +8,12 @@ class MainContainer extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo 2',
       initialRoute: '/',
+      // onGenerateRoute: handleGenerateRoute,
       routes: getRoutes(),
       theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
-          brightness: Brightness.dark
+        primarySwatch: Colors.deepOrange,
+        primaryColor: Colors.blueGrey,
+        brightness: Brightness.dark,
       ),
       navigatorKey: NavigatorService.instance.navigationKey,
     );

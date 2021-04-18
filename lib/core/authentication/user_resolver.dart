@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/core/routes/routes.dart';
+import 'package:myapp/core/services/navigator.dart';
+import 'package:myapp/core/services/user.dart';
 
 import '../firestore/firebase_auth_instance_provider.dart';
 
@@ -18,15 +21,10 @@ class _UserResolverState extends State<UserResolver> {
     super.initState();
     _listener = getFirebaseAuthInstance().authStateChanges().listen((User user) {
       if (user == null) {
-        Navigator.pushNamed(
-            context,
-            '/login'
-        );
+        NavigatorService.instance.navigateTo(routeLogin);
       } else {
-        Navigator.pushNamed(
-            context,
-            '/groups'
-        );
+        GlobalService.instance.userID = user.uid;
+        NavigatorService.instance.navigateTo(routeGroups);
       }
     });
   }

@@ -58,6 +58,11 @@ class App extends StatelessWidget {
 
     try {
       await getFirestoreAuthInstance().enablePersistence();
+    } catch(e) {
+      print(e.toString());
+    }
+
+    try {
       await getFirebaseAuthInstance().setPersistence(Persistence.LOCAL);
     } catch(e) {
       print(e.toString());

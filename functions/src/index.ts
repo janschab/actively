@@ -10,7 +10,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 exports.onUserCreate = functions.auth.user().onCreate((user) => {
-  db.collection(`users`).doc(user.uid).create({
+  return db.collection(`users`).doc(user.uid).create({
     first_name: user.displayName,
     last_name: '',
     email: user.email

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/routes/routes.dart';
 import 'package:myapp/core/services/navigator.dart';
 
 class MyBottomNavigationBar extends BottomNavigationBar {
@@ -21,18 +22,18 @@ class MyBottomNavigationBar extends BottomNavigationBar {
             ],
             selectedItemColor: Colors.deepOrange,
             onTap: (index) {
-              print(index);
-              switch (index) {
-                case 0:
-                  print('/activities');
-                  NavigatorService.instance.navigateTo('/activities');
-                  break;
-                case 1:
-                  NavigatorService.instance.navigateTo('/groups');
-                  break;
-                case 2:
-                  NavigatorService.instance.navigateTo('/profile');
-                  break;
+              if (currentIndex != index) {
+                switch (index) {
+                  case 0:
+                    NavigatorService.instance.navigateTo(routeActivities);
+                    break;
+                  case 1:
+                    NavigatorService.instance.navigateTo(routeGroups);
+                    break;
+                  case 2:
+                    NavigatorService.instance.navigateTo(routeProfile);
+                    break;
+                }
               }
             });
 }

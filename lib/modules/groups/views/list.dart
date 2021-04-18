@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/services/firestore.dart';
+import 'package:myapp/modules/groups/services/service.dart';
 import 'package:myapp/widgets/errors.dart';
 
 class GroupsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
-      future: getGroups(),
+      future: GroupsService.getGroups(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           print(snapshot.error.toString());

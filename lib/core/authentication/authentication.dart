@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:myapp/modules/groups/groups.dart';
+import 'package:myapp/core/routes/routes.dart';
+import 'package:myapp/core/services/navigator.dart';
+import 'package:myapp/core/widgets/buttons.dart';
+import 'package:myapp/core/widgets/textFields.dart';
 
-import 'authentication_controller.dart';
+import 'service.dart';
 
 class Authentication extends StatefulWidget {
   @override
@@ -11,8 +14,9 @@ class Authentication extends StatefulWidget {
 
 class _AuthenticationState extends State<Authentication> {
   TextEditingController _displayNameField = TextEditingController();
-  TextEditingController _emailField = TextEditingController();
-  TextEditingController _passwordField = TextEditingController();
+  TextEditingController _emailField =
+      TextEditingController(text: "test@test.pl");
+  TextEditingController _passwordField = TextEditingController(text: "test123");
 
   @override
   Widget build(BuildContext context) {
@@ -25,53 +29,34 @@ class _AuthenticationState extends State<Authentication> {
           constraints: BoxConstraints(maxWidth: 500),
           child: Column(
             children: [
-              TextFormField(
+              MyTextFormField(
                 controller: _displayNameField,
-                decoration: InputDecoration(
-                  hintText: 'display name',
-                  labelText: 'Display name',
-                ),
-                onFieldSubmitted: handleLogInAction,
+                hintText: 'display name',
+                labelText: 'Display name',
+                onFieldSubmitted: (s) => handleLogInAction,
               ),
-              TextFormField(
+              MyTextFormField(
                 controller: _emailField,
-                decoration: InputDecoration(
-                  hintText: 'email',
-                  labelText: 'Email',
-                ),
-                onFieldSubmitted: handleLogInAction,
+                hintText: 'email',
+                labelText: 'Email',
+                onFieldSubmitted: (s) => handleLogInAction,
               ),
-              TextFormField(
+              MyTextFormField(
                 controller: _passwordField,
                 obscureText: true,
-                decoration: InputDecoration(
-                  hintText: 'password',
-                  labelText: 'Password',
-                ),
-                onFieldSubmitted: handleLogInAction,
+                hintText: 'password',
+                labelText: 'Password',
+                onFieldSubmitted: (s) => handleLogInAction,
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 12),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: Colors.deepOrange),
-                child: MaterialButton(
-                  onPressed: () {
-                    handleLogInAction('');
-                  },
-                  child: Text("Log-in"),
-                ),
+              MyButton(
+                text: "Log-in",
+                color: Colors.blueGrey,
+                onPressed: handleLogInAction,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: Colors.transparent,
-                  border: Border.all(width: 1.0, color: Colors.deepOrange),
-                ),
-                child: MaterialButton(
-                  onPressed: handleRegisterAction,
-                  child: Text("Register"),
-                ),
+              MyButton(
+                text: "Register",
+                color: Colors.blueGrey,
+                onPressed: handleRegisterAction,
               ),
             ],
           ),
@@ -80,14 +65,13 @@ class _AuthenticationState extends State<Authentication> {
     );
   }
 
-  handleLogInAction(str) async {
-    String signInStatus = await signIn(_emailField.text, _passwordField.text);
+  handleLogInAction() async {
+    String signInStatus = await AuthenticationService.signIn(
+      _emailField.text,
+      _passwordField.text,
+    );
     if (signInStatus == "200") {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Groups(),
-          ));
+      NavigatorService.instance.navigateTo(routeGroups);
     } else {
       Fluttertoast.showToast(
           msg: signInStatus,
@@ -98,13 +82,13 @@ class _AuthenticationState extends State<Authentication> {
   }
 
   handleRegisterAction() async {
-    String registerStatus = await register(_emailField.text, _passwordField.text, _displayNameField.text);
+    String registerStatus = await AuthenticationService.register(
+      _emailField.text,
+      _passwordField.text,
+      _displayNameField.text,
+    );
     if (registerStatus == "200") {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Groups(),
-          ));
+      NavigatorService.instance.navigateTo(routeGroups);
     } else {
       Fluttertoast.showToast(
           msg: registerStatus,
