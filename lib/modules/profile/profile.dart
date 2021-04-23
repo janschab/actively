@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/Constants.dart';
 import 'package:myapp/core/widgets/bottomNavigationBar.dart';
 
 class Profile extends StatefulWidget {
@@ -13,6 +14,19 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         title: Text("Profile"),
         leading: Container(),
+        actions: <Widget>[
+        PopupMenuButton<String>(
+            onSelected: choiceAction,
+          itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice) {
+              return PopupMenuItem<String> (
+                value: choice,
+                child: Text(choice),
+              );
+              }).toList();
+          }
+          )
+        ],
       ),
       body: Container(
         child: Center(
@@ -28,5 +42,12 @@ class _ProfileState extends State<Profile> {
         currentIndex: 2,
       ),
     );
+  }
+  void choiceAction(String choice) {
+    if (choice == Constants.Settings) {
+      print('Settings');
+    }else if (choice == Constants.SignOut) {
+      print ('SignOut');
+    }
   }
 }
