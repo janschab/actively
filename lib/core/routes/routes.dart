@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/core/authentication/authentication.dart';
-import 'package:myapp/core/authentication/user_resolver.dart';
 import 'package:myapp/modules/activities/activities.dart';
+import 'package:myapp/modules/authentication/authentication.dart';
+import 'package:myapp/modules/authentication/user_resolver.dart';
 import 'package:myapp/modules/groups/views/add.dart';
 import 'package:myapp/modules/groups/views/groups.dart';
 import 'package:myapp/modules/profile/profile.dart';
+import 'package:myapp/modules/tags/tags.dart';
 
 const routeEmpty = '';
 const routeAdd = '/add';
@@ -14,7 +15,20 @@ const routeLogin = '/login';
 const routeGroups = '/groups';
 const routeGroupsAdd = "$routeGroups$routeAdd";
 const routeActivities = '/activities';
+const routeTags = '/tags';
 const routeProfile = '/profile';
+
+getRoutes() {
+  return {
+    routeHome: (context) => UserResolver(),
+    routeLogin: (context) => Authentication(),
+    routeGroups: (context) => Groups(),
+    routeGroupsAdd: (context) => AddGroup(),
+    routeActivities: (context) => Activities(),
+    routeProfile: (context) => Profile(),
+    routeTags: (context) => Tags(),
+  };
+}
 
 MaterialPageRoute handleGenerateRoute(settings) {
   Widget page;
@@ -58,16 +72,5 @@ class SetupFlowState extends State<SetupFlow> {
   Widget build(BuildContext context) {
     return Text("tetes");
   }
-}
-
-getRoutes() {
-  return {
-    routeHome: (context) => UserResolver(),
-    routeLogin: (context) => Authentication(),
-    routeGroups: (context) => Groups(),
-    routeGroupsAdd: (context) => AddGroup(),
-    routeActivities: (context) => Activities(),
-    routeProfile: (context) => Profile(),
-  };
 }
 

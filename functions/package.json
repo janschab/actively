@@ -11,7 +11,10 @@
     "build-web": "flutter build web",
     "deploy-web": "firebase deploy --only hosting",
     "deploy-firestore-rules": "firebase deploy --only firestore:rules",
-    "start-emulators": "firebase emulators:start"
+    "start-emulators": "firebase emulators:start",
+    "start-emulator-firestore": "firebase emulators:start --only firestore",
+    "start-emulator-functions": "firebase emulators:start --only functions",
+    "start-emulator-auth": "firebase emulators:start --only auth"
   },
   "engines": {
     "node": "12"

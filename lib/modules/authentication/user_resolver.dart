@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/core/firestore/firebase_auth_instance_provider.dart';
 import 'package:myapp/core/routes/routes.dart';
 import 'package:myapp/core/services/navigator.dart';
 import 'package:myapp/core/services/user.dart';
-
-import '../firestore/firebase_auth_instance_provider.dart';
+import 'package:myapp/modules/authentication/service.dart';
 
 class UserResolver extends StatefulWidget {
   @override
@@ -24,7 +24,7 @@ class _UserResolverState extends State<UserResolver> {
         NavigatorService.instance.navigateTo(routeLogin);
       } else {
         GlobalService.instance.userID = user.uid;
-        NavigatorService.instance.navigateTo(routeGroups);
+        AuthenticationService.handleSuccessfulSignIn();
       }
     });
   }

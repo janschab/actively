@@ -21,30 +21,35 @@ class _AddGroupState extends State<AddGroup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Add new group"),
+      ),
       body: LoadingOverlay(
-        child: Container(
-          child: Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-              constraints: BoxConstraints(maxWidth: 500),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    MyTextFormField(
-                        controller: _name,
-                        labelText: "Name",
-                        hintText: "name",
-                        validator: Validators.required
-                    ),
-                    MyButton(
-                      onPressed: addGroup,
-                      text: "Add group",
-                    ),
-                  ],
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.all(10),
+            child: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                constraints: BoxConstraints(maxWidth: 500),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      MyTextFormField(
+                          controller: _name,
+                          labelText: "Name",
+                          hintText: "name",
+                          validator: Validators.required
+                      ),
+                      MyButton(
+                        onPressed: addGroup,
+                        text: "Add group",
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/core/routes/routes.dart';
 import 'package:myapp/core/services/navigator.dart';
 import 'package:myapp/core/widgets/bottomNavigationBar.dart';
+import 'package:myapp/core/widgets/containers/main_scaffold.dart';
 
 import 'list.dart';
 
@@ -13,12 +14,9 @@ class Groups extends StatefulWidget {
 class _GroupsState extends State<Groups> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Groups"),
-        leading: Container(),
-      ),
-      body: Container(
+    return MainScaffold(
+      title: "Groups",
+      child: Container(
         child: Center(
           child: GroupsList(),
         ),
@@ -28,9 +26,7 @@ class _GroupsState extends State<Groups> {
         child: Icon(Icons.add),
         backgroundColor: Colors.deepOrange,
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        currentIndex: 1,
-      ),
+      index: 1,
     );
   }
 }

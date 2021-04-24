@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/core/widgets/bottomNavigationBar.dart';
+import 'package:myapp/core/widgets/containers/main_scaffold.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -9,24 +10,14 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-        leading: Container(),
-      ),
-      body: Container(
+    return MainScaffold(
+      title: "Profile",
+      child: Container(
         child: Center(
           child: Text("Profile"),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-        backgroundColor: Colors.deepOrange,
-      ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        currentIndex: 2,
-      ),
+      index: 2,
     );
   }
 }
