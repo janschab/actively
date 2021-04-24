@@ -10,7 +10,6 @@ class GroupsList extends StatelessWidget {
       future: GroupsService.getGroups(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          print(snapshot.error.toString());
           return SomethingWentWrong();
         }
 

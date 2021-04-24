@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/core/routes/routes.dart';
+import 'package:myapp/core/services/firestore.dart';
 import 'package:myapp/core/services/navigator.dart';
 import 'package:myapp/core/widgets/buttons.dart';
 import 'package:myapp/core/widgets/containers/full_size_container.dart';
@@ -10,7 +11,7 @@ class Tags extends StatefulWidget {
 }
 
 class _TagsState extends State<Tags> {
-  List<Tag> _tags = [Tag("Tag1", 1)];
+  List<Tag> _tags = [Tag("Tag1", 1, false)];
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +24,20 @@ class _TagsState extends State<Tags> {
             children: [
               Wrap(
                 children: _tags
-                    .map((_tag) => Chip(
+                    .map((_tag) => ChoiceChip(
                           label: Text(_tag.name),
+                          selected: _tag.selected,
+                          onSelected: (value) {
+                            setState(() {
+                              _tag.selected = value;
+                            });
+                          },
                         ))
                     .toList(),
               ),
               MyButton(
                 text: "Next",
-                onPressed: handleNextStep,
+                onPressed: handleTagsSave,
               ),
             ],
           ),
@@ -48,14 +55,17 @@ class _TagsState extends State<Tags> {
     });
   }
 
-  handleNextStep() {
-    NavigatorService.instance.navigateTo(routeUserDetails);
+  handleTagsSave() {
+    FirestoreService.setTagsToUser(_tags.where((tag) => tag.selected).map((e) => e.id)).then((v) {
+      NavigatorService.instance.navigateTo(routeUserDetails);
+    });
   }
 }
 
 class Tag {
   final String name;
   final int id;
+  bool selected;
 
-  Tag(this.name, this.id);
+  Tag(this.name, this.id, this.selected);
 }

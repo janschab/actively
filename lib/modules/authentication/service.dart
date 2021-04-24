@@ -22,8 +22,6 @@ class AuthenticationService {
     FirestoreService.getUser().then((userDocumentSnapshot) {
       final UserModel user = UserModel.fromMap(userDocumentSnapshot);
 
-      print(user);
-
       if (user.tags == null || user.tags.isEmpty) {
         NavigatorService.instance.navigateTo(routeTags);
       } else {

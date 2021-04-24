@@ -7,7 +7,7 @@ enum Collection {
 class UserModel {
   final String email;
   final String uid;
-  final List<int> tags;
+  final List<dynamic> tags;
 
   UserModel({this.email, this.uid, this.tags});
 
