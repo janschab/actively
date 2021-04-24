@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myapp/core/widgets/buttons.dart';
+import 'package:myapp/core/widgets/containers/full_size_container.dart';
 import 'package:myapp/core/widgets/textFields.dart';
 
 import 'service.dart';
@@ -17,45 +18,35 @@ class _AuthenticationState extends State<Authentication> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
-          child: Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              constraints: BoxConstraints(maxWidth: 500),
-              margin: EdgeInsets.only(bottom: 150),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MyTextFormField(
-                    controller: _emailField,
-                    hintText: 'email',
-                    labelText: 'Email',
-                    onFieldSubmitted: (s) => handleLogInAction,
-                  ),
-                  MyTextFormField(
-                    controller: _passwordField,
-                    obscureText: true,
-                    hintText: 'password',
-                    labelText: 'Password',
-                    onFieldSubmitted: (s) => handleLogInAction,
-                  ),
-                  MyButton(
-                    text: "Log-in",
-                    color: Colors.blueGrey,
-                    onPressed: handleLogInAction,
-                  ),
-                  MyButton(
-                    text: "Register",
-                    color: Colors.blueGrey,
-                    onPressed: handleRegisterAction,
-                  ),
-                ],
-              ),
-            ),
-          )),
+    return FullSizeContainer(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          MyTextFormField(
+            controller: _emailField,
+            hintText: 'email',
+            labelText: 'Email',
+            onFieldSubmitted: (s) => handleLogInAction,
+          ),
+          MyTextFormField(
+            controller: _passwordField,
+            obscureText: true,
+            hintText: 'password',
+            labelText: 'Password',
+            onFieldSubmitted: (s) => handleLogInAction,
+          ),
+          MyButton(
+            text: "Log-in",
+            color: Colors.blueGrey,
+            onPressed: handleLogInAction,
+          ),
+          MyButton(
+            text: "Register",
+            color: Colors.blueGrey,
+            onPressed: handleRegisterAction,
+          ),
+        ],
+      ),
     );
   }
 
