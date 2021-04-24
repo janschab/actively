@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/routes/routes.dart';
+import 'package:myapp/core/services/navigator.dart';
+import 'package:myapp/core/widgets/buttons.dart';
 import 'package:myapp/core/widgets/containers/full_size_container.dart';
 
 class Tags extends StatefulWidget {
@@ -7,9 +10,7 @@ class Tags extends StatefulWidget {
 }
 
 class _TagsState extends State<Tags> {
-  List<Tag> _tags = [
-    Tag("Tag1", 1)
-  ];
+  List<Tag> _tags = [Tag("Tag1", 1)];
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +18,21 @@ class _TagsState extends State<Tags> {
       child: RefreshIndicator(
         onRefresh: _refreshTags,
         child: FullSizeContainer(
-          child: Center(
-            child: Wrap(
-              children: _tags.map((_tag) => Chip(
-                label: Text(_tag.name),
-              )).toList(),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Wrap(
+                children: _tags
+                    .map((_tag) => Chip(
+                          label: Text(_tag.name),
+                        ))
+                    .toList(),
+              ),
+              MyButton(
+                text: "Next",
+                onPressed: handleNextStep,
+              ),
+            ],
           ),
         ),
       ),
@@ -36,6 +46,10 @@ class _TagsState extends State<Tags> {
         _tags = [];
       });
     });
+  }
+
+  handleNextStep() {
+    NavigatorService.instance.navigateTo(routeUserDetails);
   }
 }
 

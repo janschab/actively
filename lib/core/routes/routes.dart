@@ -6,6 +6,7 @@ import 'package:myapp/modules/groups/views/add.dart';
 import 'package:myapp/modules/groups/views/groups.dart';
 import 'package:myapp/modules/profile/profile.dart';
 import 'package:myapp/modules/tags/tags.dart';
+import 'package:myapp/modules/user_details/user_details.dart';
 
 const routeEmpty = '';
 const routeAdd = '/add';
@@ -17,6 +18,7 @@ const routeGroupsAdd = "$routeGroups$routeAdd";
 const routeActivities = '/activities';
 const routeTags = '/tags';
 const routeProfile = '/profile';
+const routeUserDetails = '/userDetails';
 
 getRoutes() {
   return {
@@ -27,6 +29,7 @@ getRoutes() {
     routeActivities: (context) => Activities(),
     routeProfile: (context) => Profile(),
     routeTags: (context) => Tags(),
+    routeUserDetails: (context) => UserDetails(),
   };
 }
 
