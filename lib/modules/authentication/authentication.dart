@@ -69,7 +69,7 @@ class _AuthenticationState extends State<Authentication> {
       _emailField.text,
       _passwordField.text,
     );
-    if (registerStatus == "200") {
+    if (registerStatus != "200") {
       Fluttertoast.showToast(
         msg: registerStatus,
         toastLength: Toast.LENGTH_SHORT,

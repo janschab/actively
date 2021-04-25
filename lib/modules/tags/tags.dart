@@ -11,7 +11,19 @@ class Tags extends StatefulWidget {
 }
 
 class _TagsState extends State<Tags> {
-  List<Tag> _tags = [Tag("Tag1", 1, false)];
+  List<Tag> _tags = [
+    Tag("Tag1", 1, false),
+    Tag("Tag2", 2, false),
+    Tag("Tag3", 3, false),
+    Tag("Tag4", 4, false),
+    Tag("Tag5", 5, false),
+    Tag("Tag6", 6, false),
+    Tag("Tag7", 7, false),
+    Tag("Tag8", 8, false),
+    Tag("Tag9", 9, false),
+    Tag("Tag10", 10, false),
+    Tag("Tag11", 11, false),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +34,23 @@ class _TagsState extends State<Tags> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: Text("Select labels"),
+              ),
               Wrap(
                 children: _tags
-                    .map((_tag) => ChoiceChip(
-                          label: Text(_tag.name),
-                          selected: _tag.selected,
-                          onSelected: (value) {
-                            setState(() {
-                              _tag.selected = value;
-                            });
-                          },
+                    .map((_tag) => Container(
+                          margin: EdgeInsets.all(4),
+                          child: ChoiceChip(
+                            label: Text(_tag.name),
+                            selected: _tag.selected,
+                            onSelected: (value) {
+                              setState(() {
+                                _tag.selected = value;
+                              });
+                            },
+                          ),
                         ))
                     .toList(),
               ),
@@ -56,7 +75,8 @@ class _TagsState extends State<Tags> {
   }
 
   handleTagsSave() {
-    FirestoreService.setTagsToUser(_tags.where((tag) => tag.selected).map((e) => e.id)).then((v) {
+    FirestoreService.setTagsToUser(
+        _tags.where((tag) => tag.selected).map((e) => e.id)).then((v) {
       NavigatorService.instance.navigateTo(routeUserDetails);
     });
   }
