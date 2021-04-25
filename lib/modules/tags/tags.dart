@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/core/routes/routes.dart';
 import 'package:myapp/core/services/firestore.dart';
 import 'package:myapp/core/services/navigator.dart';
+import 'package:myapp/core/services/user.dart';
 import 'package:myapp/core/widgets/buttons.dart';
 import 'package:myapp/core/widgets/containers/full_size_container.dart';
 
@@ -11,19 +12,7 @@ class Tags extends StatefulWidget {
 }
 
 class _TagsState extends State<Tags> {
-  List<Tag> _tags = [
-    Tag("Tag1", 1, false),
-    Tag("Tag2", 2, false),
-    Tag("Tag3", 3, false),
-    Tag("Tag4", 4, false),
-    Tag("Tag5", 5, false),
-    Tag("Tag6", 6, false),
-    Tag("Tag7", 7, false),
-    Tag("Tag8", 8, false),
-    Tag("Tag9", 9, false),
-    Tag("Tag10", 10, false),
-    Tag("Tag11", 11, false),
-  ];
+  List<Tag> _tags = getTags();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +68,7 @@ class _TagsState extends State<Tags> {
                     .toList(),
               ),
               MyButton(
-                text: "Next",
+                text: "Save",
                 onPressed: handleTagsSave,
               ),
             ],
@@ -104,6 +93,30 @@ class _TagsState extends State<Tags> {
     ).then((v) {
       NavigatorService.instance.navigateTo(routeUserDetails);
     });
+  }
+
+  static List<Tag> getTags() {
+    final List<Tag> tags = [
+      Tag("Tag1", 1, false),
+      Tag("Tag2", 2, false),
+      Tag("Tag3", 3, false),
+      Tag("Tag4", 4, false),
+      Tag("Tag5", 5, false),
+      Tag("Tag6", 6, false),
+      Tag("Tag7", 7, false),
+      Tag("Tag8", 8, false),
+      Tag("Tag9", 9, false),
+      Tag("Tag10", 10, false),
+      Tag("Tag11", 11, false),
+    ];
+
+    if (GlobalService.instance.user.tags != null) {
+      GlobalService.instance.user.tags.forEach((tagID) {
+        tags.firstWhere((tag) => tag.id == tagID).selected = true;
+      });
+    }
+
+    return tags;
   }
 }
 
