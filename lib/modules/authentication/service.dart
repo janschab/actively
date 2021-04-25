@@ -4,6 +4,7 @@ import 'package:myapp/core/firestore/model.dart';
 import 'package:myapp/core/routes/routes.dart';
 import 'package:myapp/core/services/firestore.dart';
 import 'package:myapp/core/services/navigator.dart';
+import 'package:myapp/core/services/user.dart';
 
 class AuthenticationService {
   static Future<String> signIn(String email, String password) async {
@@ -21,6 +22,8 @@ class AuthenticationService {
   static void handleSuccessfulSignIn() {
     FirestoreService.getUser().then((userDocumentSnapshot) {
       final UserModel user = UserModel.fromMap(userDocumentSnapshot);
+
+      GlobalService.instance.user = user;
 
       if (user.tags == null || user.tags.isEmpty) {
         NavigatorService.instance.navigateTo(routeTags);
