@@ -35,7 +35,31 @@ class _TagsState extends State<Tags> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 20),
+                child: _tags.any((tag) => tag.selected)
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(bottom: 20),
+                            child: Text("Your labels"),
+                          ),
+                          Wrap(
+                            children: _tags
+                                .where((tag) => tag.selected)
+                                .map((tag) => Container(
+                                      margin: EdgeInsets.all(4),
+                                      child: Chip(
+                                        label: Text(tag.name),
+                                      ),
+                                    ))
+                                .toList(),
+                          )
+                        ],
+                      )
+                    : Container(),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 20, top: 30),
                 child: Text("Select labels"),
               ),
               Wrap(
@@ -76,7 +100,8 @@ class _TagsState extends State<Tags> {
 
   handleTagsSave() {
     FirestoreService.setTagsToUser(
-        _tags.where((tag) => tag.selected).map((e) => e.id)).then((v) {
+      _tags.where((tag) => tag.selected).map((e) => e.id),
+    ).then((v) {
       NavigatorService.instance.navigateTo(routeUserDetails);
     });
   }
