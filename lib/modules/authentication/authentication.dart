@@ -24,7 +24,7 @@ class _AuthenticationState extends State<Authentication> {
         children: [
           MyTextFormField(
             controller: _emailField,
-            hintText: 'email',
+            hintText: 'em ail',
             labelText: 'Email',
             onFieldSubmitted: (s) => handleLogInAction,
           ),

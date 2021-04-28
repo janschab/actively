@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/core/widgets/bottomNavigationBar.dart';
+import 'package:myapp/core/services/user.dart';
 import 'package:myapp/core/widgets/containers/main_scaffold.dart';
 
 class Profile extends StatefulWidget {
@@ -12,9 +12,14 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return MainScaffold(
       title: "Profile",
-      child: Container(
-        child: Center(
-          child: Text("Profile"),
+      child: Center(
+        child: Container(
+          child: Column(
+            children: [
+              Text(GlobalService.instance.user.firstName),
+              Text(GlobalService.instance.user.lastName),
+            ],
+          ),
         ),
       ),
       index: 2,

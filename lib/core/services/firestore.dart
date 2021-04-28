@@ -16,4 +16,12 @@ class FirestoreService {
         .doc(GlobalService.instance.userID)
         .set({"tags": tags}, SetOptions(merge: true));
   }
+
+  static Future<void> setUserDetails(String firstName, String lastName) {
+    return getFirebaseFirestoreInstance()
+        .collection("users")
+        .doc(GlobalService.instance.userID)
+        .set({"first_name": firstName, "last_name": lastName},
+            SetOptions(merge: true));
+  }
 }
