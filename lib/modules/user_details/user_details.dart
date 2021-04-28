@@ -27,13 +27,13 @@ class _UserDetailsState extends State<UserDetails> {
           children: [
             MyTextFormField(
               controller: _firstNameField,
-              hintText: 'firstname',
+              hintText: 'first name',
               labelText: 'First Name',
               validator: Validators.required,
             ),
             MyTextFormField(
               controller: _lastNameField,
-              hintText: 'secondname',
+              hintText: 'second name',
               labelText: 'Second Name',
               validator: Validators.required,
             ),
